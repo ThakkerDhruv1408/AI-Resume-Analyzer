@@ -1,0 +1,21 @@
+ollama
+chromadb == 0.5.18
+pdfplumber 
+langchain
+langchain-core
+langchain-ollama
+langchain-community
+langchain_text_splitters
+unstructured
+unstructured[all-docs]
+fastembed
+pdfplumber
+sentence-transformers
+elevenlabs
+flask
+flask_login
+flask_bcrypt  
+flask_login  
+flask_dropzone
+flask_sqlalchemy
+psycopg2
