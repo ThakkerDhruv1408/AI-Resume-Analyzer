@@ -65,18 +65,6 @@ An intelligent Flask-based web application that leverages state-of-the-art AI mo
 
 ## 🚀 Getting Started
 
-1. Install Ollama                   [https://ollama.com/]
-2. Pull Ollama Models 
-    ollama pull mistral             [https://ollama.com/library/mistral]
-    ollama pull nomic-embed-text    [https://ollama.com/library/nomic-embed-text]
-3. Set-up Python virtual environment
-4. Clone Repository                 [git clone https://github.com/ThakkerDhruv1408/AI-Resume-Analyzer.git]
-5. install requiremetn libraris      
-6. run the app 
-
-
-## 🚀 Getting Started
-
 ### Prerequisites
 
 - Python 3.8 or higher
