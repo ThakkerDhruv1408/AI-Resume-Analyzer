@@ -23,7 +23,7 @@ def load_resume(resume_path):
     return resume_text
 
 #3 Create vector databases
-def create_vector_db(resume_text, job_description):
+def create_vector_db(resume_text):
     """Stores resume and job description embeddings in ChromaDB for retrieval."""
     
 
@@ -31,11 +31,9 @@ def create_vector_db(resume_text, job_description):
     
     # Split texts
     resume_chunks = text_splitter.split_text(resume_text)
-    job_chunks = text_splitter.split_text(job_description)
     
     # Convert to document format
     resume_docs = [{"page_content": chunk} for chunk in resume_chunks]
-    job_docs = [{"page_content": chunk} for chunk in job_chunks]
 
     try:
         # Create vector stores
@@ -45,18 +43,13 @@ def create_vector_db(resume_text, job_description):
             collection_name="resume",
         )
 
-        job_db = Chroma.from_texts(
-            texts=[doc["page_content"] for doc in job_docs],
-            embedding=embeddings,
-            collection_name="job_description",
-        )
 
     except ValueError as e:
         print("⚠️ Error initializing ChromaDB:", str(e))
         print("🔄 Trying to reset ChromaDB storage...")
-        return create_vector_db(resume_text, job_description)
+        return create_vector_db(resume_text)
 
-    return resume_db, job_db
+    return resume_db
 
 
 # 4. Retrieve relevant resume sections based on job description
@@ -111,7 +104,7 @@ def analyze_resume_job_fit(resume_path, job_description):
     resume_text = load_resume(resume_path)
 
     # Create vector databases
-    resume_db, _ = create_vector_db(resume_text, job_description)
+    resume_db, _ = create_vector_db(resume_text)
 
     # Retrieve the most relevant resume sections
     relevant_resume_text = retrieve_relevant_resume_sections(resume_db, job_description)
@@ -135,9 +128,9 @@ def findResume():
         file_path = os.path.join(folder_path, files[0])
     return file_path
 
-# # Example usage
+# Example usage
 # if __name__ == "__main__":
-#     resume_path = findResume()
+#     resume_path = "<Resume Path>"
 #     job_path = """We are seeking a Junior Blockchain Developer with a B.Tech in Computer Science (Blockchain specialization) and proven skills in Solidity, Python, and JavaScript. The ideal candidate should have experience with Web3, DeFi, Ethereum development, smart contracts, and DApps development. Key requirements include knowledge of blockchain integration with IoT, supply chain solutions, and hands-on experience with tools like Remix IDE and Foundry. The candidate should be familiar with Next.js, Tailwind CSS, and have practical experience in developing decentralized applications with MetaMask integration. A minimum CGPA of 7.5 and certifications in Blockchain Basics and Smart Contracts are required, along with understanding of cryptography, Bitcoin fundamentals, IPFS, and DAOs."""
     
 #     result = analyze_resume_job_fit(resume_path, job_path)
