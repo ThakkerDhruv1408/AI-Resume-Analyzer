@@ -177,6 +177,12 @@ def process_resume():
         return result
     else:
         return jsonify({'Error' : 'Error procesiing resume'})
+    
+
+@app.route('/description', methods = ['GET','POST']) 
+def description():
+    return render_template('description.html')  
+
 
 def printgd():
     global global_role_description
