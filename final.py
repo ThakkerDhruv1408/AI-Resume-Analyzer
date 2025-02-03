@@ -5,7 +5,8 @@ from langchain_ollama import OllamaLLM, OllamaEmbeddings , ChatOllama
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
-from chromadb import PersistentClient
+import nltk
+nltk.download('all') 
 
 
 # 1. Setup LLM and Embeddings

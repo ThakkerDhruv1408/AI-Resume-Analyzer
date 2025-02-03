@@ -19,3 +19,4 @@ flask_login
 flask_dropzone
 flask_sqlalchemy
 psycopg2
+nltk
