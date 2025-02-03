@@ -13,6 +13,9 @@
     <div class="dashboard">
         <header>
             <h1>Welcome to Resume Analyzer</h1>
+            <form action="{{ url_for('description') }}" method="GET">
+                <button class="description-button">Add Description</button>
+            </form>
             <form action="{{ url_for('logout') }}" method="GET">
                 <button class="logout-button">Logout</button>
             </form>
@@ -82,17 +85,17 @@
         });
 
         document.getElementById('processButton').addEventListener('click', function () {
-        if (myDropzone.files.length === 0) {
-            // Show error message if no resume is uploaded
-            document.getElementById('result').innerHTML = '<p style="color: red;">Please upload a resume before processing.</p>';
-        } else {
-            // Clear any existing error messages
-            document.getElementById('result').innerHTML = '';
+            if (myDropzone.files.length === 0) {
+                // Show error message if no resume is uploaded
+                document.getElementById('result').innerHTML = '<p style="color: red;">Please upload a resume before processing.</p>';
+            } else {
+                // Clear any existing error messages
+                document.getElementById('result').innerHTML = '';
 
-            // Show loader and process the file
-            document.getElementById('loader').style.display = 'block';
-            myDropzone.processQueue();
-        }
+                // Show loader and process the file
+                document.getElementById('loader').style.display = 'block';
+                myDropzone.processQueue();
+            }
         });
 
 
@@ -110,15 +113,15 @@
 
                             <div class="analysis-results">
                                 ${Object.entries(
-                                    data.analysis_points.reduce((acc, point) => {
-                                        // Group points by category
-                                        if (!acc[point.category]) {
-                                            acc[point.category] = [];
-                                        }
-                                        acc[point.category].push(point);
-                                        return acc;
-                                    }, {})
-                                ).map(([category, points]) => `
+                        data.analysis_points.reduce((acc, point) => {
+                            // Group points by category
+                            if (!acc[point.category]) {
+                                acc[point.category] = [];
+                            }
+                            acc[point.category].push(point);
+                            return acc;
+                        }, {})
+                    ).map(([category, points]) => `
                                     <div class="category-section">
                                         <h3>${category}</h3>
                                         ${points.map((point, index) => `
@@ -148,13 +151,13 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('result').textContent = 'There was an error processing the resume. Please try again.';
                 });
-            }
+        }
 
         document.getElementById('role').addEventListener('change', function () {
             document.getElementById('result').innerHTML = '';
         });
 
-        </script>
+    </script>
 </body>
 
 </html>

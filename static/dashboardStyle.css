@@ -61,6 +61,23 @@ header h1 {
     box-shadow: 0 0 15px rgba(255, 59, 59, 0.7);
 }
 
+.description-button {
+    background: linear-gradient(135deg, #4444d3, #54a52b);
+    border: none;
+    padding: 10px 100px;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.description-button:hover {
+    background: linear-gradient(135deg, #0cdfbb, #454ec7);
+    box-shadow: 0 0 15px rgba(214, 70, 250, 0.7);
+}
+
 /* Upload Form */
 .dropzone {
     border: 2px dashed #00E676;
@@ -163,8 +180,13 @@ header h1 {
 }
 
 @keyframes loading {
-    0% { width: 0%; }
-    100% { width: 100%; }
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 /* Results Section */

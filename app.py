@@ -8,9 +8,8 @@ from final import analyze_resume_job_fit , findResume
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '<you SECRET_KEY>'
-app.config['SQLALCHEMY_DATABASE_URI'] =   "<your database access link>" #'postgresql://<username>:<password>@localhost:5432/<databasename>' 
-
+app.config['SECRET_KEY'] = '123456789'
+app.config['SQLALCHEMY_DATABASE_URI'] =   'postgresql://postgres:59035903@localhost:5432/Analyzer' #"<your database access link>"
 app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'application/pdf'
 app.config['DROPZONE_MAX_FILE_SIZE'] = 3
 app.config['DROPZONE_MAX_FILES'] = 1
@@ -84,7 +83,7 @@ def register():
                             password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
-            flash('Registration Successfull ! , Redirecting to the login page ...')
+            flash('Registration Successfull !  Redirecting to the login page ...')
             # return redirect(url_for('success'))
     return render_template('register.html', error_message=error_message)
 
@@ -178,10 +177,21 @@ def process_resume():
     else:
         return jsonify({'Error' : 'Error procesiing resume'})
     
-
 @app.route('/description', methods = ['GET','POST']) 
 def description():
-    return render_template('description.html')  
+    error_message = ''
+    if request.method == 'POST':
+        role_name = request.form['role_name']
+        description = request.form['description']
+        temp_role_name = RoleRequirement.query.filter_by(role_name = role_name).first()
+        if temp_role_name:
+            error_message = 'Role already exists !  please try again with different role name'
+        else:
+            role = RoleRequirement(role_name = role_name , description = description)
+            db.session.add(role)
+            db.session.commit()
+            flash('Role added successfully !')
+    return render_template('description.html' , error_message = error_message)  
 
 
 def printgd():
