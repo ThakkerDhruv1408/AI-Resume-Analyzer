@@ -1,7 +1,7 @@
 import os
 import shutil
 from langchain_community.document_loaders import UnstructuredPDFLoader
-from langchain_ollama import OllamaLLM, OllamaEmbeddings , ChatOllama
+from langchain_ollama import OllamaLLM, OllamaEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
@@ -28,7 +28,7 @@ def create_vector_db(resume_text):
     """Stores resume and job description embeddings in ChromaDB for retrieval."""
     
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=120)
     
     # Split texts
     resume_chunks = text_splitter.split_text(resume_text)

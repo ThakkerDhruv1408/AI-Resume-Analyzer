@@ -33,8 +33,8 @@ body {
 }
 
 .form-control {
-    background-color: rgba(45, 55, 72, 0.95);
-    border: none;
+    background-color: rgb(99 126 141 / 95%);
+    border: 2px dotted #4ecca3;
     color: #fff;
     padding: 1rem;
     border-radius: 8px;
@@ -135,4 +135,14 @@ textarea.form-control {
     color: #f77676;
     font-size: 14px;
     margin-top: 10px;
+}
+
+.btn-delete {
+    color: #060000;
+    background: #bf3b3b;
+    border: 2px solid #000000;
+    border-radius: 11px;
+    height: 40px;
+    width: 1235px;
+    font-weight: bold;
 }

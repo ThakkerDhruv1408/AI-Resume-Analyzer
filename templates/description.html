@@ -7,7 +7,6 @@
     <title>Add Job Description - Resume Analyzer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/description.css">
-
 </head>
 
 <body>
@@ -21,7 +20,7 @@
     <div class="container">
         <div class="main-container">
             <h2 class="form-title">Add Job Description</h2>
-            <form action="{{ url_for('description') }}" method="POST">
+            <form action="{{ url_for('addDescription') }}" method="POST">
                 <div class="form-section">
                     <div class="mb-4">
                         <label for="roleName" class="form-label">Role Name</label>
@@ -37,6 +36,28 @@
                 <button type="submit" class="btn-submit">PROCESS</button>
                 <span class="error-message">{{ error_message }}</span>
             </form>
+
+
+
+            <!-- New container for deleting roles -->
+            <form action="{{ url_for('delete_role') }}" method="POST">
+                <div class="delete-role-container mt-4">
+                    <h3 class="form-title">Delete Role</h3>
+                    <form action="{{ url_for('description') }}" method="POST">
+                        <div class="mb-4">
+                            <label for="deleteRoleName" class="form-label">Select Role to Delete</label>
+                            <select class="form-control" id="deleteRoleName" name="role_to_delete" required>
+                                {% for role in roles %}
+                                <option value="{{ role.role_id }}">{{ role.role_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                    <button type="submit" class="btn-delete">DELETE ROLE</button>
+                </div>
+            </form>
+
+
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul class="flashed-messages">
@@ -44,7 +65,7 @@
                 <li>{{ message }}</li>
                 {% endfor %}
             </ul>
-            <meta http-equiv="refresh" content="2;url={{ url_for('dashboard') }}">
+            <meta http-equiv="refresh" content="3;url={{ url_for('dashboard') }}">
             {% endif %}
             {% endwith %}
         </div>

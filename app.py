@@ -177,8 +177,15 @@ def process_resume():
     else:
         return jsonify({'Error' : 'Error procesiing resume'})
     
-@app.route('/description', methods = ['GET','POST']) 
+    
+@app.route('/description', methods = ['GET' , 'POST'])
 def description():
+    roles = RoleRequirement.query.all()
+    return render_template('description.html' , roles = roles)
+
+
+@app.route('/addDescription', methods = ['GET','POST']) 
+def addDescription():
     error_message = ''
     if request.method == 'POST':
         role_name = request.form['role_name']
@@ -193,6 +200,19 @@ def description():
             flash('Role added successfully !')
     return render_template('description.html' , error_message = error_message)  
 
+
+@app.route('/delete_role', methods=['GET','POST'])
+@login_required
+def delete_role():
+    role_id = request.form.get('role_to_delete')
+    
+    delete_id = RoleRequirement.query.get(role_id)
+    db.session.delete(delete_id)
+    db.session.commit()
+    flash(f'Role deleted successfully')
+
+    
+    return redirect(url_for('description'))
 
 def printgd():
     global global_role_description

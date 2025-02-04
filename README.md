@@ -37,7 +37,7 @@ An intelligent Flask-based web application that leverages state-of-the-art AI mo
 ![Register page](./ScreenShots/register.png)
 ![Dashboard page](./ScreenShots/dashboard.png)
 ![Dashboard_process](./ScreenShots/dashboard_process.png)
-![Add New Description](./ScreenShots/description.png)
+![Manage Role and job Description](./ScreenShots/manage%20description.png)
 ![Response Format](./ScreenShots/result.png)
 
 
